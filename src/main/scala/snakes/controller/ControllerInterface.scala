@@ -3,7 +3,9 @@ package snakes.controller
 import snakes.model.gameComponent.GameInterface
 import snakes.util.{CommandInterface, Observable}
 
-trait ControllerInterface extends Observable {
+import scala.swing.Publisher
+
+trait ControllerInterface extends Observable with Publisher{
   def startGame(): Unit
   def createGame(size: Int): Unit
   def addPlayer(name: String): Unit

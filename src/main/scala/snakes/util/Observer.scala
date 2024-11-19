@@ -1,19 +1,22 @@
 package snakes
 package util
 
+import scala.swing.{Publisher, event}
+
 trait Observer {
   def update(e: Event): Unit
 }
-  
 
-trait Observable {
+trait Observable extends Publisher {
   var subscribers: Vector[Observer] = Vector()
   def add(s: Observer) = subscribers = subscribers :+ s
-  //def remove(s: Observer) = subscribers = subscribers.filterNot(o => o == s)
-  def notifyObservers(e: Event) = subscribers.foreach(o => o.update(e))
+  def notifyObservers(e: Event) = {
+    subscribers.foreach(o => o.update(e))
+    publish(e)
+  }
 }
 
-enum Event {
+enum Event extends event.Event {
   case Create
   case AddPlayer
   case Roll(rollResult: Int)
