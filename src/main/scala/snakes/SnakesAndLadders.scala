@@ -6,6 +6,7 @@ import snakes.controller.{Controller, ControllerInterface}
 import snakes.model.gameComponent.Game
 import snakes.util.Event
 
+import java.awt.GraphicsEnvironment
 import scala.concurrent.ExecutionContext.Implicits.global
 import scala.concurrent.Future
 import scala.io.StdIn.readLine
@@ -15,7 +16,6 @@ object SnakesAndLadders {
   val injector = Guice.createInjector(new SnakesModule)
   val controller = injector.getInstance(classOf[ControllerInterface])
   val tui = TUI(controller)
-  val gui = new GUI(controller)
 
   controller.notifyObservers(Event.Create)
 
